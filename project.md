@@ -1,4 +1,9 @@
-MVC 架構
+# Project 專案設計書
+## Coding Style
+不加分號
+須寫unit test
+
+## MVC 架構
 
 M:
 * Player
