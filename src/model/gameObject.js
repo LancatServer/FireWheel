@@ -1,11 +1,19 @@
+/**碰撞檢測物件
+ * 此型別物件可以被檢測碰撞檢測，並以beenTouch 來處理碰撞
+ * 擁有physical屬性，其中帶有各個物理資料
+ */
 class GameObject  {
-  constructor (pos, shape) {
-    this.pos = pos
-    this.shape = shape
-    this.v = Position(0, 0)
+  constructor() {
+    this.physical = {
+      pos,
+      v,
+      m, 
+      shape,
+      friction
+    }
   }
   beenTouch (obj) {
-    switch (obj.shape) {
+    switch (obj.physical.shape) {
       case "circle" :
         this.circleRebound(obj)
         break
