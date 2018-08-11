@@ -2,17 +2,16 @@
  * 此型別物件可以被檢測碰撞檢測，並以beenTouch 來處理碰撞
  * 擁有physical屬性，其中帶有各個物理資料
  */
-class GameObject  {
-  constructor() {
-    this.physical = {
-      pos,
-      v,
-      m, 
-      shape,
-      friction
-    }
-  }
-  beenTouch (obj) {
+import {Position} from './position'
+
+export class GameObject  {
+  pos : Position
+  v : Position
+  m : number
+  shape :string
+  friction: number
+
+  beenTouch (obj) :void {
     switch (obj.physical.shape) {
       case "circle" :
         this.circleRebound(obj)
@@ -22,13 +21,13 @@ class GameObject  {
         break 
     }
   }
-  circleRebound (obj) {
+  circleRebound (obj) :void{
     /*
       處理對圓形的反彈
       由sub object 定義
     */
   }
-  rectRebound (obj) {
+  rectRebound (obj) :void{
       /*
         處理對矩形的反彈
       由sub object 定義
