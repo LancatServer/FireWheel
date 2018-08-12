@@ -1,4 +1,4 @@
-import { GameObject } from './gameObject'
+import { GameObject, SHAPE } from './gameObject'
 import { Player } from './player'
 
 export class Monster extends GameObject{
@@ -8,7 +8,7 @@ export class Monster extends GameObject{
     this.pos = pos,
     this.m = 15,
     this.r = 30,
-    this.shape = 'circle',
+    this.shape = SHAPE.circle,
     this.friction = 0.85
   }
 

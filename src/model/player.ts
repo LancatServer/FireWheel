@@ -1,16 +1,18 @@
-import { GameObject } from './gameObject'
+import { GameObject, SHAPE } from './gameObject'
 import { Position } from './position'
 
 export class Player extends GameObject {
-  gameStatus :object = { //遊戲狀態
-    blood: 5,         //血量
-    hp: 5,            //血量上限
-    def: 0,           //防禦
-    cd: 500,          //冷卻時間
-    speed: 2,         //跑速
-  }
+  gameStatus :object 
   constructor () {
     super()
+    this.shape = SHAPE.circle
+    this.gameStatus = { //遊戲狀態
+      blood: 5,         //血量
+      hp: 5,            //血量上限
+      def: 0,           //防禦
+      cd: 500,          //冷卻時間
+      speed: 2,         //跑速
+    }
   }
 
   hurt(power) {

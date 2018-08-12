@@ -4,30 +4,38 @@
  */
 import {Position} from './position'
 
+export const enum SHAPE {
+  circle,
+  rect
+} 
+
 export class GameObject  {
   pos : Position
   v : Position
   m : number
-  shape :string
-  friction: number
+  shape :SHAPE
+  friction : number
+  r : number
+  w : number
+  h : number
 
-  beenTouch (obj) :void {
-    switch (obj.physical.shape) {
-      case "circle" :
+  beenTouch (obj :GameObject) :void {
+    switch (obj.shape) {
+      case SHAPE.circle :
         this.circleRebound(obj)
         break
-      case "rect" :
+      case SHAPE.rect :
         this.rectRebound(obj)
         break 
     }
   }
-  circleRebound (obj) :void{
+  circleRebound (obj :GameObject) :void{
     /*
       處理對圓形的反彈
       由sub object 定義
     */
   }
-  rectRebound (obj) :void{
+  rectRebound (obj :GameObject) :void{
       /*
         處理對矩形的反彈
       由sub object 定義
