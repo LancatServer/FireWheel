@@ -1,18 +1,27 @@
 import { GameObject, SHAPE } from './gameObject'
 import { Position } from './position'
+import { circleRebound } from './physical'
 
 export class Player extends GameObject {
-  gameStatus :object 
+  blood :number   //血量
+  hp : number     //血量上限
+  def :number     //防禦
+  cd :number      //冷卻時間
+  speed :number   //跑速
   constructor () {
     super()
+    this.pos = new Position(0, 0)
+    this.v = new Position(0, 0)
+    this.m = 10
     this.shape = SHAPE.circle
-    this.gameStatus = { //遊戲狀態
-      blood: 5,         //血量
-      hp: 5,            //血量上限
-      def: 0,           //防禦
-      cd: 500,          //冷卻時間
-      speed: 2,         //跑速
-    }
+    this.friction = 0.9
+    this.r = 15
+    //遊戲屬性
+    this.blood = 5
+    this.hp = 5
+    this.def = 0
+    this.cd = 500
+    this.speed = 2
   }
 
   hurt(power) {
@@ -27,14 +36,15 @@ export class Player extends GameObject {
     this.pos.add(this.v)
   }
 
-  circleRebound(obj) {
+  circleRebound(obj :GameObject) {
     /**碰到圓形處理 
      * obj: GameObject物件
      * 圓形反彈程式
     */
+    this.v = circleRebound(this, obj, 1.5)
   }
 
-  rectRebound(obj) {
+  rectRebound(obj :GameObject) {
     /**碰到牆壁處理
      * 牆壁反彈/抵銷程式
      */

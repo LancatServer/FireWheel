@@ -10,14 +10,14 @@ export const enum SHAPE {
 } 
 
 export class GameObject  {
-  pos : Position
-  v : Position
-  m : number
-  shape :SHAPE
-  friction : number
-  r : number
-  w : number
-  h : number
+  pos : Position      //位置
+  v : Position        //速度
+  m : number          //質量
+  shape :SHAPE        //形狀
+  friction : number   //摩擦力
+  r : number          //半徑(圓形)
+  w : number          //寬(矩形)
+  h : number          //高(矩形)
 
   beenTouch (obj :GameObject) :void {
     switch (obj.shape) {
