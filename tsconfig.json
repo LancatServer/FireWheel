@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "AMD",
-    "outDir": "js"
+    "module": "amd",
+    "outFile": "js/app.js"
   },
 }

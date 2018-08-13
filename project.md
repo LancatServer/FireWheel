@@ -1,7 +1,8 @@
 # Project 專案設計書
 ## Coding Style
-不加分號
-須寫unit test
+* 不加分號
+* 須寫unit test
+* 縮排2 space
 
 ## MVC 架構
 

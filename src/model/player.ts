@@ -1,6 +1,7 @@
 import { GameObject, SHAPE } from './gameObject'
 import { Position } from './position'
-import { circleRebound } from './physical'
+import { circleRebound, rectRebound } from './physical'
+import { Key } from './key'
 
 export class Player extends GameObject {
   blood :number   //血量
@@ -28,11 +29,17 @@ export class Player extends GameObject {
     /* 受傷處理 */
   }
 
-  update(key) {
+  update(key :Key) {
     /**狀態更新 
      * key: 各個按鍵之狀態
     */
     this.v.multiply(this.friction) //將速度乘上摩擦力
+
+    if (key.up) this.v.y += this.speed
+    if (key.down) this.v.y -= this.speed
+    if (key.right) this.v.x += this.speed
+    if (key.left) this.v.x -= this.speed
+
     this.pos.add(this.v)
   }
 
@@ -48,5 +55,6 @@ export class Player extends GameObject {
     /**碰到牆壁處理
      * 牆壁反彈/抵銷程式
      */
+    this.v = rectRebound(this, obj, 1)
   }
 }
