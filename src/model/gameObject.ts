@@ -16,8 +16,7 @@ export class GameObject  {
   shape :SHAPE        //形狀
   friction : number   //摩擦力
   r : number          //半徑(圓形)
-  w : number          //寬(矩形)
-  h : number          //高(矩形)
+  wh :Position
 
   beenTouch (obj :GameObject) :void {
     switch (obj.shape) {

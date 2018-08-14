@@ -17,8 +17,8 @@ function set_range (minimal :number, maximum :number, number :number) :number {
 }
 
 export function circle_to_rect (c :GameObject, r :GameObject) :boolean {
-  let x = set_range(r.pos.x, r.pos.x + r.w, c.pos.x)
-  let y = set_range(r.pos.y, r.pos.y + r.h, c.pos.y)
+  let x = set_range(r.pos.x, r.pos.x + r.wh.x, c.pos.x)
+  let y = set_range(r.pos.y, r.pos.y + r.wh.y, c.pos.y)
   let d = (c.pos.x - x) ^ 2 + (c.pos.y - y) ^ 2
   return d < (c.r ^ 2)
 }
@@ -52,8 +52,8 @@ export function rectRebound (c :GameObject, r :GameObject, k :number) :Position 
    * 將x * -k反彈
    * 旋轉回原座標系
    */
-  let x :number = set_range(r.pos.x, r.pos.x + r.w, c.pos.x)
-  let y :number = set_range(r.pos.y, r.pos.y + r.h, c.pos.y)
+  let x :number = set_range(r.pos.x, r.pos.x + r.wh.x, c.pos.x)
+  let y :number = set_range(r.pos.y, r.pos.y + r.wh.y, c.pos.y)
   let angle :number = Math.atan ((c.pos.y - y) / (c.pos.x - x)) 
   let turn :Position = turnPosition(c.v, angle)
   turn.x *= -k
