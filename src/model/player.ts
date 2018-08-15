@@ -25,7 +25,7 @@ export class Player extends GameObject {
     this.speed = 2
   }
 
-  hurt(power) {
+  hurt(power :number) {
     /* 受傷處理 */
   }
 
@@ -35,8 +35,8 @@ export class Player extends GameObject {
     */
     this.v.multiply(this.friction) //將速度乘上摩擦力
 
-    if (key.up) this.v.y += this.speed
-    if (key.down) this.v.y -= this.speed
+    if (key.up) this.v.y -= this.speed
+    if (key.down) this.v.y += this.speed
     if (key.right) this.v.x += this.speed
     if (key.left) this.v.x -= this.speed
 
@@ -49,12 +49,14 @@ export class Player extends GameObject {
      * 圓形反彈程式
     */
     this.v = circleRebound(this, obj, 1.5)
+    this.pos.add(this.v)
   }
 
   rectRebound(obj :GameObject) {
     /**碰到牆壁處理
      * 牆壁反彈/抵銷程式
      */
-    this.v = rectRebound(this, obj, 1)
+    this.v = rectRebound(this, obj, 1.5)
+    this.pos.add(this.v)
   }
 }

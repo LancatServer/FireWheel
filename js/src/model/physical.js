@@ -1,9 +1,9 @@
 define(["require", "exports", "./position"], function (require, exports, position_1) {
     "use strict";
-    exports.__esModule = true;
+    Object.defineProperty(exports, "__esModule", { value: true });
     function circle_to_circle(c1, c2) {
-        var d = (c1.pos.x - c2.pos.x) ^ 2 + (c1.pos.y - c2.pos.y) ^ 2;
-        return d < ((c1.r + c2.r) ^ 2);
+        var d = Math.pow((c1.pos.x - c2.pos.x), 2) + Math.pow((c1.pos.y - c2.pos.y), 2);
+        return d < (Math.pow((c1.r + c2.r), 2));
     }
     exports.circle_to_circle = circle_to_circle;
     function set_range(minimal, maximum, number) {
@@ -20,8 +20,8 @@ define(["require", "exports", "./position"], function (require, exports, positio
     function circle_to_rect(c, r) {
         var x = set_range(r.pos.x, r.pos.x + r.wh.x, c.pos.x);
         var y = set_range(r.pos.y, r.pos.y + r.wh.y, c.pos.y);
-        var d = (c.pos.x - x) ^ 2 + (c.pos.y - y) ^ 2;
-        return d < (c.r ^ 2);
+        var d = Math.pow((c.pos.x - x), 2) + Math.pow((c.pos.y - y), 2);
+        return d < (Math.pow(c.r, 2));
     }
     exports.circle_to_rect = circle_to_rect;
     function turnPosition(pos, angle) {

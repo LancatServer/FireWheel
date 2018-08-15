@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 define(["require", "exports", "./gameObject", "./position", "./physical"], function (require, exports, gameObject_1, position_1, physical_1) {
     "use strict";
-    exports.__esModule = true;
+    Object.defineProperty(exports, "__esModule", { value: true });
     var Player = /** @class */ (function (_super) {
         __extends(Player, _super);
         function Player() {
@@ -41,9 +41,9 @@ define(["require", "exports", "./gameObject", "./position", "./physical"], funct
             */
             this.v.multiply(this.friction); //將速度乘上摩擦力
             if (key.up)
-                this.v.y += this.speed;
-            if (key.down)
                 this.v.y -= this.speed;
+            if (key.down)
+                this.v.y += this.speed;
             if (key.right)
                 this.v.x += this.speed;
             if (key.left)
@@ -56,12 +56,14 @@ define(["require", "exports", "./gameObject", "./position", "./physical"], funct
              * 圓形反彈程式
             */
             this.v = physical_1.circleRebound(this, obj, 1.5);
+            this.pos.add(this.v);
         };
         Player.prototype.rectRebound = function (obj) {
             /**碰到牆壁處理
              * 牆壁反彈/抵銷程式
              */
-            this.v = physical_1.rectRebound(this, obj, 1);
+            this.v = physical_1.rectRebound(this, obj, 1.5);
+            this.pos.add(this.v);
         };
         return Player;
     }(gameObject_1.GameObject));

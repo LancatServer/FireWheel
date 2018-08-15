@@ -1,6 +1,6 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
-    exports.__esModule = true;
+    Object.defineProperty(exports, "__esModule", { value: true });
     var Position = /** @class */ (function () {
         function Position(x, y) {
             if (x === void 0) { x = 0; }
