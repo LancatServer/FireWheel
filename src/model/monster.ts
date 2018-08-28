@@ -5,18 +5,18 @@ import { SHAPE, Color, CircleObj } from './obj';
 
 export abstract class Monster extends GameObject implements CircleObj {
   blood :number = 1
-  r :number
+  r :number = 15
+  shape :SHAPE = SHAPE.circle
+  friction :number = 0.85
+  speed !:number
 
   constructor() {
     super()
-    this.m = 15,
-    this.r = 30,
-    this.shape = SHAPE.circle,
-    this.friction = 0.85
   }
 
   reset (pos :Position, color :Color) {
     this.pos = pos
+    this.v = new Position(0, 0)
     this.color = color
   }
 
