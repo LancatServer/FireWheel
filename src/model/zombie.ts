@@ -1,7 +1,5 @@
 import { Monster } from "./monster";
-import { Position } from "./position";
-import { Color } from "./obj";
-import { Player } from "./player";
+import { GameObject } from "./gameObject";
 
 export class Zombie extends Monster{
   constructor () {
@@ -10,7 +8,7 @@ export class Zombie extends Monster{
     this.speed = 5
   }
 
-  update (player :Player) :void {
+  update (player :GameObject) :void {
     this.near(player.pos, this.speed)
   }
 }

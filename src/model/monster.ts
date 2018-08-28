@@ -20,7 +20,7 @@ export abstract class Monster extends GameObject implements CircleObj {
     this.color = color
   }
 
-  update (player :Player) : void{
+  update (player :GameObject) : void{
     /**遊戲更新
      * player 玩家物件，以GameObject型別參考
      * 可以取得玩家的 physical資訊

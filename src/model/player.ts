@@ -1,7 +1,7 @@
 import { GameObject, } from './gameObject'
 import { Position } from './position'
 import { Key } from './key'
-import { SHAPE, PhysicalObj, CircleObj } from './obj';
+import { SHAPE, CircleObj } from './obj';
 
 export class Player extends GameObject implements CircleObj {
   blood !:number

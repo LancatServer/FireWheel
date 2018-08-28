@@ -28,20 +28,20 @@ export interface PhysicalObj {
   restitu :number
 }
 
-export interface CircleObj extends PhysicalObj {
-  shape :SHAPE
+export interface CircleObj {
   r :number
+  pos :Position
 }
 
-export interface RectObj extends PhysicalObj {
-  shape :SHAPE
+export interface RectObj { 
   wh :Position
+  pos :Position
 }
 
 export interface Physical {
   circle_to_circle(c1 :CircleObj, c2 :CircleObj) :boolean
   circle_to_rect (c :CircleObj, r :RectObj) :boolean
-  circleRebound (c1 :CircleObj, c2 :CircleObj, k :number) :Position
-  rectRebound (c :CircleObj, r :RectObj, k :number) :Position
+  circleRebound (c1 :PhysicalObj, c2 :PhysicalObj, k :number) :Position
+  rectRebound (c :PhysicalObj, r :RectObj, k :number) :Position
   frictionCompute (obj :PhysicalObj, fps :number) :Position
 }
