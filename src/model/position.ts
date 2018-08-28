@@ -6,19 +6,20 @@ export class Position {
     this.y = y
   }
 
-  add (vector):void {
+  add (pos :Position):Position {
     /**加法
      * 將加上另一個Vector
      */
-    this.x += vector.x
-    this.y += vector.y
+    return new Position(
+      this.x + pos.x,
+      this.y + pos.y
+    )
   }
 
-  multiply (number):void {
-    /**乘法
-     * 將數值乘上一個number
-     */
-    this.x *= number
-    this.y *= number
+  multiply ( number :number ) :Position {
+    return new Position(
+      this.x * number,
+      this.y * number
+    )
   }
 }

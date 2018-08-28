@@ -3,42 +3,42 @@
  * 擁有physical屬性，其中帶有各個物理資料
  */
 import {Position} from './position'
+import { PhysicalController } from './physical'
+import { PhysicalObj, SHAPE, Color, CircleObj, RectObj, Physical } from './obj';
 
-export const enum SHAPE {
-  circle,
-  rect
-} 
+const physical :Physical = new PhysicalController()
 
-export class GameObject  {
-  pos : Position      //位置
-  v : Position        //速度
-  m : number          //質量
-  shape :SHAPE        //形狀
-  friction : number   //摩擦力
-  r : number          //半徑(圓形)
-  w : number          //寬(矩形)
-  h : number          //高(矩形)
+export abstract class GameObject implements PhysicalObj{
+  pos !:Position 
+  v :Position = new Position()
+  friction !:number 
+  m :number = 1
+  shape !:SHAPE 
+  restitu :number = 1
+  color !:Color
+  r :number = 0
 
-  beenTouch (obj :GameObject) :void {
-    switch (obj.shape) {
-      case SHAPE.circle :
-        this.circleRebound(obj)
-        break
-      case SHAPE.rect :
-        this.rectRebound(obj)
-        break 
-    }
-  }
-  circleRebound (obj :GameObject) :void{
+  circleRebound (obj :CircleObj) :void{
     /*
       處理對圓形的反彈
       由sub object 定義
     */
+    this.v = physical.circleRebound(this, obj, this.restitu)
   }
-  rectRebound (obj :GameObject) :void{
-      /*
-        處理對矩形的反彈
-      由sub object 定義
-      */
+
+  rectRebound (obj :RectObj) :void{
+    /*
+      處理對矩形的反彈
+    由sub object 定義
+    */
+    this.v = physical.rectRebound(this, obj, this.restitu)
+  }
+
+  updateV( fps :number) :void {
+    this.v = physical.frictionCompute(this, fps)
+  }
+
+  updatePos ( fps :number) :void {
+    this.pos = this.pos.add(this.v.multiply(1 / fps))
   }
 }
