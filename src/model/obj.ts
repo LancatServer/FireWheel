@@ -17,6 +17,18 @@ export class Color {
     this.b = c[2]
     this.color = c
   }
+
+  get () :string {
+    let result :string = ''
+    for (let c in this.color) {
+      let n :string = this.color[c].toString(16)
+      if (n.length === 1) {
+        n = '0' + n
+      }
+      result += n
+    }
+    return '##' + result
+  }
 }
 
 export interface PhysicalObj {

@@ -1,7 +1,7 @@
 import { GameObject, } from './gameObject'
 import { Position } from './position'
 import { Key } from './key'
-import { SHAPE, CircleObj } from './obj';
+import { SHAPE, CircleObj, Color } from './obj';
 
 export class Player extends GameObject implements CircleObj {
   blood !:number
@@ -11,10 +11,10 @@ export class Player extends GameObject implements CircleObj {
   speed !:number   //跑速
   m = 10
   r = 15
-  friction = 0.9
+  friction = 2
   shape = SHAPE.circle
 
-  constructor () {
+  constructor (public color :Color) {
     super()
     this.reset()
   }
@@ -27,7 +27,7 @@ export class Player extends GameObject implements CircleObj {
     this.hp = 5
     this.def = 0
     this.cd = 500
-    this.speed = 2
+    this.speed = 50
   }
 
   injury(power :number) {

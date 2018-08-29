@@ -61,10 +61,10 @@ export class PhysicalController implements Physical {
     return turnPosition(turn, -angle)
   }
 
-  frictionCompute ( obj :PhysicalObj ) :Position {
+  frictionCompute ( obj :PhysicalObj, fps :number) :Position {
     return new Position(
-      Math.max( 0, obj.v.x - obj.friction * obj.m),
-      Math.max( 0, obj.v.y - obj.friction * obj.m)
+      obj.v.x * (1 - obj.friction / fps ),
+      obj.v.y * (1 - obj.friction / fps )
     )
   }
 }

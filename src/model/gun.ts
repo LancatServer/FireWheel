@@ -1,39 +1,42 @@
-import { GameObject } from "./gameObject";
 import { timer } from "./timer";
 import { Color } from "./obj";
 
 export class Gun {
-  speed !:number
-  shuting :boolean = false
   angle :number = 0
-  direction :number = 0
-  cycle :number = 2
-  color !:Color
+  speed !:number
+  R !:number
+  r !:number
+  private shoting :boolean = false
+  private direction :number = 1
+  cycle :number = 2000
   
-  constructor (player :GameObject) {
-    this.color = player.color
+  constructor ( public color :Color) {
   }
 
-  update () {
+  update (fps :number) {
     //是否按下發射鍵
-    if (this.shuting) {
-      this.angle += this.speed * this.direction
-    } 
+    this.angle += this.speed * this.direction / fps
   }
 
   keyDown () {
-    this.shuting = true
+    this.shoting = true
+    this.direction *= -1
     timer(this.changeDirection, this.cycle)
   }
 
   keyUp () {
-    this.shuting = false
+    this.shoting = false
+    this.shot()
   }
 
-  changeDirection () {
-    if (this.shuting) {
+  private changeDirection () {
+    if (this.shoting) {
       this.direction *= -1
       timer(this.changeDirection, this.cycle)
     }
+  }
+
+  shot () :void {
+
   }
 }
