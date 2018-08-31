@@ -38,6 +38,8 @@ export interface PhysicalObj {
   m :number
   shape :SHAPE
   restitu :number
+  f :number,
+  angle :number
 }
 
 export interface CircleObj {

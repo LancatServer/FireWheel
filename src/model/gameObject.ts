@@ -15,6 +15,8 @@ export abstract class GameObject implements PhysicalObj{
   restitu :number = 1
   color !:Color
   r :number = 0
+  f :number = 0
+  angle :number = 0
 
   circleRebound (obj :PhysicalObj) :void{
     this.v = physical.circleRebound(this, obj, this.restitu)

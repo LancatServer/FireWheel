@@ -40,10 +40,12 @@ export class Player extends GameObject implements CircleObj {
     /**狀態更新 
      * key: 各個按鍵之狀態
     */
-
-    if (key.up) this.v.y -= this.speed
-    if (key.down) this.v.y += this.speed
-    if (key.right) this.v.x += this.speed
-    if (key.left) this.v.x -= this.speed
+    let compute = new Position()
+    if (key.up) compute.y += 1
+    if (key.down) compute.y -= 1 
+    if (key.right) compute.x += 1
+    if (key.left) compute.x -= 1
+    this.angle = Math.atan2(compute.y, compute.x)
+    if (key.up || key.down || key.right || key.left) this.f = this.speed
   }
 }
