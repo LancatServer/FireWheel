@@ -57,13 +57,13 @@ define(["require", "exports", "./position"], function (require, exports, positio
             return turnPosition(turn, -angle);
         };
         PhysicalController.prototype.frictionCompute = function (obj, fps) {
-            var native = function (num) { return num / Math.abs(num); };
+            var positive = function (num) { return num / Math.abs(num); };
             var a = (obj.f - obj.friction) / obj.m / fps;
             var r_v = obj.v.add(new position_1.Position(Math.cos(obj.angle) * a, Math.sin(obj.angle) * a));
-            if (native(r_v.x) !== native(obj.v.x) && obj.f === 0) {
+            if (positive(r_v.x) !== positive(obj.v.x) && obj.f === 0) {
                 r_v.x = 0;
             }
-            if (native(r_v.y) !== native(obj.v.y) && obj.f === 0) {
+            if (positive(r_v.y) !== positive(obj.v.y) && obj.f === 0) {
                 r_v.y = 0;
             }
             obj.v = r_v;

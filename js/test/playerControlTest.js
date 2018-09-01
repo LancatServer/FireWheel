@@ -13,7 +13,7 @@ define(["require", "exports", "../src/control/playerController", "../src/model/o
         }
     };
     var controller = new playerController_1.PlayerController(setting);
-    var fps = 40;
+    var fps = 100;
     var canvas = document.getElementById('my_canvas');
     var ctx = canvas.getContext('2d');
     function main() {

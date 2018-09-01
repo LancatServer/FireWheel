@@ -21,7 +21,7 @@ define(["require", "exports", "./gameObject", "./position"], function (require, 
             _this.color = color;
             _this.m = 1;
             _this.r = 15;
-            _this.friction = 50;
+            _this.friction = 500;
             _this.shape = 0 /* circle */;
             _this.f = 0;
             _this.reset();
@@ -55,11 +55,11 @@ define(["require", "exports", "./gameObject", "./position"], function (require, 
                 compute.x += 1;
             if (key.left)
                 compute.x -= 1;
-            this.angle = Math.atan2(compute.y, compute.x);
             console.log(this.angle / Math.PI);
-            if (key.up || key.down || key.right || key.left)
+            if (key.up || key.down || key.right || key.left) {
                 this.f = this.speed;
-            else
+                this.angle = Math.atan2(compute.y, compute.x);
+            }else
                 this.f = 0;
         };
         return Player;
