@@ -11,7 +11,7 @@ export class Player extends GameObject implements CircleObj {
   speed !:number   //跑速
   m = 1
   r = 15
-  friction = 1000
+  friction = 1500
   shape = SHAPE.circle
   f = 0
 
@@ -46,7 +46,6 @@ export class Player extends GameObject implements CircleObj {
     if (key.down) compute.y -= 1 
     if (key.right) compute.x += 1
     if (key.left) compute.x -= 1
-    console.log(this.angle / Math.PI)
     if (key.up || key.down || key.right || key.left) {
       this.f = this.speed
       this.angle = Math.atan2(compute.y, compute.x)

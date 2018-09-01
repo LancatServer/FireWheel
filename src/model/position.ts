@@ -23,12 +23,3 @@ export class Position {
     )
   }
 }
-
-export class PolarPosition {
-  angle :number
-  distance :number
-  constructor (a :number, d :number) {
-    this.angle = a
-    this.distance = d
-  }
-}

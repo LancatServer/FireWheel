@@ -8,5 +8,5 @@ interface TimerI {
  * 避免受環境影響
  */
 export function timer (callback :Function, time :number) {
-  setInterval(callback, time)
+  setTimeout(callback, time)
 }

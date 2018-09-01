@@ -93,12 +93,12 @@ export class PhysicalController implements Physical {
       Math.cos(angle) * friction,
       Math.sin(angle) * friction
     ))
-    let positive = (num :number) => num / Math.abs(num)
+    let positive = (num :number, num2 :number) => num / Math.abs(num) === num2 / Math.abs(num2)
     if (obj.f === 0) {
-      if (positive(obj.v.x) !== positive(r_v.x)){
+      if (!positive(r_v.x, obj.v.x)){
         r_v.x = 0
       }
-      if (positive(obj.v.y) !== positive(r_v.y)){
+      if (!positive(r_v.y, obj.v.y)){
         r_v.y = 0
       }
     }

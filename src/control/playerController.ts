@@ -32,7 +32,6 @@ export class PlayerController {
     this.playerView = new PlayerView(this.player, this.gun)
     document.addEventListener("keydown", (event :KeyboardEvent) => this.keySet(event, true))
     document.addEventListener("keyup", (event :KeyboardEvent) => this.keySet(event, false))
-    setInterval(() => console.log(this.player.v), 1000)
   }
 
   update (fps :number) {
@@ -62,12 +61,12 @@ export class PlayerController {
         this.key.left = type
         break
       case this.key_map.space :
-        this.key.space = type
-        if (type) {
+        if (type && this.key.space === false) {
           this.gun.keyDown()
-        }else {
+        }else if (!type && this.key.space === true){
           this.gun.keyUp()
         }
+        this.key.space = type
         break
       case this.key_map.enter:
         this.key.enter = type
