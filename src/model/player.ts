@@ -46,9 +46,11 @@ export class Player extends GameObject implements CircleObj {
     if (key.down) compute.y -= 1 
     if (key.right) compute.x += 1
     if (key.left) compute.x -= 1
-    this.angle = Math.atan2(compute.y, compute.x)
     console.log(this.angle / Math.PI)
-    if (key.up || key.down || key.right || key.left) this.f = this.speed 
+    if (key.up || key.down || key.right || key.left) {
+      this.f = this.speed
+      this.angle = Math.atan2(compute.y, compute.x)
+    }
     else this.f = 0
   }
 }
