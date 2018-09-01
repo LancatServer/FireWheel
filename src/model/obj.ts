@@ -17,6 +17,18 @@ export class Color {
     this.b = c[2]
     this.color = c
   }
+
+  get () :string {
+    let result :string = ''
+    for (let c in this.color) {
+      let n :string = this.color[c].toString(16)
+      if (n.length === 1) {
+        n = '0' + n
+      }
+      result += n
+    }
+    return '##' + result
+  }
 }
 
 export interface PhysicalObj {
@@ -26,22 +38,25 @@ export interface PhysicalObj {
   m :number
   shape :SHAPE
   restitu :number
+  f :number,
+  angle :number
 }
 
-export interface CircleObj extends PhysicalObj {
-  shape :SHAPE
+export interface CircleObj {
   r :number
+  pos :Position
 }
 
-export interface RectObj extends PhysicalObj {
-  shape :SHAPE
+export interface RectObj { 
   wh :Position
+  pos :Position
 }
 
 export interface Physical {
   circle_to_circle(c1 :CircleObj, c2 :CircleObj) :boolean
   circle_to_rect (c :CircleObj, r :RectObj) :boolean
-  circleRebound (c1 :CircleObj, c2 :CircleObj, k :number) :Position
-  rectRebound (c :CircleObj, r :RectObj, k :number) :Position
+  circleRebound (c1 :PhysicalObj, c2 :PhysicalObj, k :number) :Position
+  rectRebound (c :PhysicalObj, r :RectObj, k :number) :Position
   frictionCompute (obj :PhysicalObj, fps :number) :Position
+  updateV (obj :PhysicalObj, fps :number) :Position
 }

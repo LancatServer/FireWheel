@@ -1,7 +1,7 @@
 import { GameObject, } from './gameObject'
 import { Position } from './position'
 import { Key } from './key'
-import { SHAPE, PhysicalObj, CircleObj } from './obj';
+import { SHAPE, CircleObj, Color } from './obj';
 
 export class Player extends GameObject implements CircleObj {
   blood !:number
@@ -9,12 +9,13 @@ export class Player extends GameObject implements CircleObj {
   def !:number     //防禦
   cd !:number      //冷卻時間
   speed !:number   //跑速
-  m = 10
+  m = 1
   r = 15
-  friction = 0.9
+  friction = 1500
   shape = SHAPE.circle
+  f = 0
 
-  constructor () {
+  constructor (public color :Color) {
     super()
     this.reset()
   }
@@ -27,7 +28,7 @@ export class Player extends GameObject implements CircleObj {
     this.hp = 5
     this.def = 0
     this.cd = 500
-    this.speed = 2
+    this.speed = 3000
   }
 
   injury(power :number) {
@@ -40,10 +41,15 @@ export class Player extends GameObject implements CircleObj {
     /**狀態更新 
      * key: 各個按鍵之狀態
     */
-
-    if (key.up) this.v.y -= this.speed
-    if (key.down) this.v.y += this.speed
-    if (key.right) this.v.x += this.speed
-    if (key.left) this.v.x -= this.speed
+    let compute = new Position()
+    if (key.up) compute.y += 1
+    if (key.down) compute.y -= 1 
+    if (key.right) compute.x += 1
+    if (key.left) compute.x -= 1
+    if (key.up || key.down || key.right || key.left) {
+      this.f = this.speed
+      this.angle = Math.atan2(compute.y, compute.x)
+    }
+    else this.f = 0
   }
 }

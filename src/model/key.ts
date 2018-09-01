@@ -1,8 +1,9 @@
 
 export class Key {
-  up :boolean
-  down :boolean
-  right :boolean
-  left :boolean
-  space :boolean
+  up :boolean = false
+  down :boolean = false
+  right :boolean = false
+  left :boolean = false
+  space :boolean = false
+  enter :boolean = false
 }
