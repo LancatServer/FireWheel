@@ -9,10 +9,11 @@ export class Player extends GameObject implements CircleObj {
   def !:number     //防禦
   cd !:number      //冷卻時間
   speed !:number   //跑速
-  m = 10
+  m = 1
   r = 15
-  friction = 2
+  friction = 50
   shape = SHAPE.circle
+  f = 0
 
   constructor (public color :Color) {
     super()
@@ -27,7 +28,7 @@ export class Player extends GameObject implements CircleObj {
     this.hp = 5
     this.def = 0
     this.cd = 500
-    this.speed = 50
+    this.speed = 5000
   }
 
   injury(power :number) {
@@ -46,6 +47,8 @@ export class Player extends GameObject implements CircleObj {
     if (key.right) compute.x += 1
     if (key.left) compute.x -= 1
     this.angle = Math.atan2(compute.y, compute.x)
-    if (key.up || key.down || key.right || key.left) this.f = this.speed
+    console.log(this.angle / Math.PI)
+    if (key.up || key.down || key.right || key.left) this.f = this.speed 
+    else this.f = 0
   }
 }

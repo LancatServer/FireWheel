@@ -26,11 +26,7 @@ export abstract class GameObject implements PhysicalObj{
     this.v = physical.rectRebound(this, obj, this.restitu)
   }
 
-  updateV( fps :number) :void {
-    this.v = physical.frictionCompute(this, fps)
-  }
-
   updatePos ( fps :number) :void {
-    this.pos = this.pos.add(this.v.multiply(1 / fps))
+    this.pos = physical.frictionCompute(this, fps)
   }
 }

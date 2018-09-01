@@ -12,7 +12,7 @@ const setting = {
   }
 }
 const controller = new PlayerController(setting)
-const fps = 100
+const fps = 40
 const canvas = <HTMLCanvasElement> document.getElementById('my_canvas')
 const ctx = <CanvasRenderingContext2D> canvas.getContext('2d')
 function main () {

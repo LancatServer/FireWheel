@@ -62,7 +62,18 @@ export class PhysicalController implements Physical {
   }
 
   frictionCompute ( obj :PhysicalObj, fps :number) :Position {
-    if (Math.abs(obj.v.x) < obj.friction) {}
+    let native = (num :number) => num / Math.abs(num)
     let a = (obj.f - obj.friction) / obj.m / fps
+    let r_v = obj.v.add(new Position(
+      Math.cos(obj.angle) * a,
+      Math.sin(obj.angle) * a
+    ))
+    if (native(r_v.x) !== native(obj.v.x) && obj.f === 0) {
+      r_v.x = 0
+    }
+    if (native(r_v.y) !== native(obj.v.y) && obj.f === 0) {
+      r_v.y = 0
+    }
+    return obj.pos.add(r_v.multiply(1/fps))
   }
 }
