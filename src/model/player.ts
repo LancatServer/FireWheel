@@ -11,7 +11,7 @@ export class Player extends GameObject implements CircleObj {
   speed !:number   //跑速
   m = 1
   r = 15
-  friction = 50
+  friction = 1000
   shape = SHAPE.circle
   f = 0
 
@@ -28,7 +28,7 @@ export class Player extends GameObject implements CircleObj {
     this.hp = 5
     this.def = 0
     this.cd = 500
-    this.speed = 5000
+    this.speed = 3000
   }
 
   injury(power :number) {

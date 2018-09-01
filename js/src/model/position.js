@@ -20,4 +20,12 @@ define(["require", "exports"], function (require, exports) {
         return Position;
     }());
     exports.Position = Position;
+    var PolarPosition = /** @class */ (function () {
+        function PolarPosition(a, d) {
+            this.angle = a;
+            this.distance = d;
+        }
+        return PolarPosition;
+    }());
+    exports.PolarPosition = PolarPosition;
 });

@@ -61,6 +61,14 @@ export class PhysicalController implements Physical {
     return turnPosition(turn, -angle)
   }
 
+  updateV (obj :PhysicalObj, fps :number) :Position {
+    let a = obj.f / (obj.m * fps)
+    return obj.v.add( new Position(
+      Math.cos(obj.angle) * a,
+      Math.sin(obj.angle) * a
+    ))
+  }
+/*
   frictionCompute ( obj :PhysicalObj, fps :number ) :Position {
     let positive = (num :number) => num / Math.abs(num)
     let a = (obj.f - obj.friction) / obj.m / fps
@@ -76,5 +84,24 @@ export class PhysicalController implements Physical {
     }
     obj.v = r_v
     return obj.pos.add(r_v.multiply(1/fps))
+  }
+  */
+  frictionCompute ( obj :PhysicalObj, fps :number) :Position {
+    let angle = Math.atan2(obj.v.y, obj.v.x)
+    let friction = -obj.friction / (obj.m * fps)
+    let r_v = obj.v.add(new Position(
+      Math.cos(angle) * friction,
+      Math.sin(angle) * friction
+    ))
+    let positive = (num :number) => num / Math.abs(num)
+    if (obj.f === 0) {
+      if (positive(obj.v.x) !== positive(r_v.x)){
+        r_v.x = 0
+      }
+      if (positive(obj.v.y) !== positive(r_v.y)){
+        r_v.y = 0
+      }
+    }
+    return r_v
   }
 }

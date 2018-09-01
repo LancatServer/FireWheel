@@ -16,12 +16,14 @@ define(["require", "exports", "../model/player", "../model/key", "../model/playe
             this.playerView = new playerView_1.PlayerView(this.player, this.gun);
             document.addEventListener("keydown", function (event) { return _this.keySet(event, true); });
             document.addEventListener("keyup", function (event) { return _this.keySet(event, false); });
-            setInterval(function () { return console.log(_this.player.pos); }, 1000);
+            setInterval(function () { return console.log(_this.player.v); }, 1000);
         }
         PlayerController.prototype.update = function (fps) {
             this.player.update(this.key);
             this.gun.update(fps);
+            this.player.updateV(fps);
             this.player.updatePos(fps);
+            this.player.frictionCompute(fps);
         };
         PlayerController.prototype.paint = function (canvas, ctx) {
             this.playerView.paint(canvas, ctx);

@@ -17,8 +17,14 @@ define(["require", "exports", "./position", "./physical"], function (require, ex
         GameObject.prototype.rectRebound = function (obj) {
             this.v = physical.rectRebound(this, obj, this.restitu);
         };
+        GameObject.prototype.updateV = function (fps) {
+            this.v = physical.updateV(this, fps);
+        };
         GameObject.prototype.updatePos = function (fps) {
-            this.pos = physical.frictionCompute(this, fps);
+            this.pos = this.pos.add(this.v.multiply(1 / fps));
+        };
+        GameObject.prototype.frictionCompute = function (fps) {
+            this.v = physical.frictionCompute(this, fps);
         };
         return GameObject;
     }());

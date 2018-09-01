@@ -32,13 +32,15 @@ export class PlayerController {
     this.playerView = new PlayerView(this.player, this.gun)
     document.addEventListener("keydown", (event :KeyboardEvent) => this.keySet(event, true))
     document.addEventListener("keyup", (event :KeyboardEvent) => this.keySet(event, false))
-    setInterval(() => console.log(this.player.pos), 1000)
+    setInterval(() => console.log(this.player.v), 1000)
   }
 
   update (fps :number) {
     this.player.update(this.key)
     this.gun.update(fps)
+    this.player.updateV(fps)
     this.player.updatePos(fps)
+    this.player.frictionCompute(fps)
   }
 
   paint (canvas :any, ctx :any) :void {

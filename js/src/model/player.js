@@ -21,7 +21,7 @@ define(["require", "exports", "./gameObject", "./position"], function (require, 
             _this.color = color;
             _this.m = 1;
             _this.r = 15;
-            _this.friction = 500;
+            _this.friction = 1000;
             _this.shape = 0 /* circle */;
             _this.f = 0;
             _this.reset();
@@ -35,7 +35,7 @@ define(["require", "exports", "./gameObject", "./position"], function (require, 
             this.hp = 5;
             this.def = 0;
             this.cd = 500;
-            this.speed = 5000;
+            this.speed = 3000;
         };
         Player.prototype.injury = function (power) {
             /* 受傷處理 */
@@ -59,7 +59,8 @@ define(["require", "exports", "./gameObject", "./position"], function (require, 
             if (key.up || key.down || key.right || key.left) {
                 this.f = this.speed;
                 this.angle = Math.atan2(compute.y, compute.x);
-            }else
+            }
+            else
                 this.f = 0;
         };
         return Player;

@@ -58,4 +58,5 @@ export interface Physical {
   circleRebound (c1 :PhysicalObj, c2 :PhysicalObj, k :number) :Position
   rectRebound (c :PhysicalObj, r :RectObj, k :number) :Position
   frictionCompute (obj :PhysicalObj, fps :number) :Position
+  updateV (obj :PhysicalObj, fps :number) :Position
 }

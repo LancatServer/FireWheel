@@ -56,18 +56,42 @@ define(["require", "exports", "./position"], function (require, exports, positio
             turn.x *= -k;
             return turnPosition(turn, -angle);
         };
-        PhysicalController.prototype.frictionCompute = function (obj, fps) {
-            var positive = function (num) { return num / Math.abs(num); };
-            var a = (obj.f - obj.friction) / obj.m / fps;
-            var r_v = obj.v.add(new position_1.Position(Math.cos(obj.angle) * a, Math.sin(obj.angle) * a));
+        PhysicalController.prototype.updateV = function (obj, fps) {
+            var a = obj.f / (obj.m * fps);
+            return obj.v.add(new position_1.Position(Math.cos(obj.angle) * a, Math.sin(obj.angle) * a));
+        };
+        /*
+          frictionCompute ( obj :PhysicalObj, fps :number ) :Position {
+            let positive = (num :number) => num / Math.abs(num)
+            let a = (obj.f - obj.friction) / obj.m / fps
+            let r_v = obj.v.add(new Position(
+              Math.cos(obj.angle) * a,
+              Math.sin(obj.angle) * a
+            ))
             if (positive(r_v.x) !== positive(obj.v.x) && obj.f === 0) {
-                r_v.x = 0;
+              r_v.x = 0
             }
             if (positive(r_v.y) !== positive(obj.v.y) && obj.f === 0) {
-                r_v.y = 0;
+              r_v.y = 0
             }
-            obj.v = r_v;
-            return obj.pos.add(r_v.multiply(1 / fps));
+            obj.v = r_v
+            return obj.pos.add(r_v.multiply(1/fps))
+          }
+          */
+        PhysicalController.prototype.frictionCompute = function (obj, fps) {
+            var angle = Math.atan2(obj.v.y, obj.v.x);
+            var friction = -obj.friction / (obj.m * fps);
+            var r_v = obj.v.add(new position_1.Position(Math.cos(angle) * friction, Math.sin(angle) * friction));
+            var positive = function (num) { return num / Math.abs(num); };
+            if (obj.f === 0) {
+                if (positive(obj.v.x) !== positive(r_v.x)) {
+                    r_v.x = 0;
+                }
+                if (positive(obj.v.y) !== positive(r_v.y)) {
+                    r_v.y = 0;
+                }
+            }
+            return r_v;
         };
         return PhysicalController;
     }());
