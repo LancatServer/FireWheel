@@ -74,6 +74,7 @@ export class PhysicalController implements Physical {
     if (native(r_v.y) !== native(obj.v.y) && obj.f === 0) {
       r_v.y = 0
     }
+    obj.v = r_v
     return obj.pos.add(r_v.multiply(1/fps))
   }
 }
