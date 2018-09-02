@@ -5,6 +5,7 @@ import { Bullet } from "../model/bullet";
 import { Key } from "../model/key";
 import { PlayerGun } from "../model/playerGun";
 import { PlayerView } from "../view/playerView";
+import { Painter } from "../view/painter";
 
 class keyMap {
   up !:string
@@ -42,8 +43,9 @@ export class PlayerController {
     this.player.frictionCompute(fps)
   }
 
-  paint (canvas :any, ctx :any) :void {
-    this.playerView.paint(canvas, ctx)
+  paint (painter :Painter) :void {
+    painter.clear()
+    this.playerView.paint(painter)
   }
 
   keySet (key :KeyboardEvent, type :boolean) {
