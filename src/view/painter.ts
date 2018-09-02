@@ -20,7 +20,6 @@ export class PainterImpl implements Painter {
       this.ctx.fill()
     }
     this.ctx.closePath()
-    debugger
   }
 
   public rect ( r :RectObj, color :Color, stroke :boolean = false ) :void {
