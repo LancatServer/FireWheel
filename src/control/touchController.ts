@@ -17,7 +17,7 @@ export interface TouchController {
 
 export class TouchControllerImpl {
   //圓形物件
-  circles :Array<CircleObj>
+  circles :Array<CircleObj & GameObject>
   //矩形物件
   rects :Array<RectObj>
   //監聽物件
@@ -33,7 +33,7 @@ export class TouchControllerImpl {
     this.listeners = new Array()
   }
 
-  addCircle ( c :CircleObj ) :void {
+  addCircle ( c :CircleObj & GameObject ) :void {
     this.circles.push( c )
   }
 
@@ -45,15 +45,43 @@ export class TouchControllerImpl {
     this.listeners.push( { obj: obj, callback: callback} )
   }
 
+  /**檢查是否碰撞
+   * 如果有就呼叫該物件反彈函數
+   */
   update () :void {
-    for (let r in this.rects) {
-      for (let c in this.circles) {
-        let circle = this.circles[c]
-        let rect = this.rects[r]
-        if (this.physical.circle_to_rect(circle, rect)) {
-          circle.
+    /**跟牆壁
+     * 目前牆壁無法處理反彈
+     */
+    for (let r of this.rects) {
+      for (let c of this.circles) {
+        if (this.physical.circle_to_rect(c, r)) {
+          //僅 circle
+          c.rectRebound(r)
         }
       }
+    }
+    for (let c1 of this.circles) {
+      for (let c2 of this.circles) {
+        if (c1 === c2) break
+        if ( this.physical.circle_to_circle(c1, c2)) {
+          c1.circleRebound(c2)
+          c2.circleRebound(c1)
+
+          //檢查是否被監聽
+          this.checkListener(c1, c2)
+        }
+      }
+    }
+  }
+
+  /**檢查額外監聽項
+   */
+  private checkListener (obj :GameObject, obj2 :GameObject) {
+    for (let o of this.listeners) {
+      if (o.obj === obj) o.callback(obj2)
+    }
+    for (let o of this.listeners) {
+      if (o.obj === obj2) o.callback(obj)
     }
   }
 }
